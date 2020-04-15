@@ -1,0 +1,41 @@
+  .form-group
+{
+    margin:auto;
+   
+    position: fixed;
+    top: 30%;
+    left: 10%;
+    margin-top: -50px;
+    margin-left: -20px;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+   
+}  
+ #proceed
+ {
+     color: white;
+     position: fixed;
+     top: 22%;
+     left:31%;
+     margin-left: 60px;
+ }
+ table, th, td 
+ {
+     margin: 10px 0;
+     border: solid 1px #333;
+     padding: 2px 4px;
+     font: 15px Verdana;
+     border-collapse: collapse;
+     border-spacing: 0;
+     width: 100%;
+     text-align: left;
+     padding: 8px;
+     height: 100%;
+    
+    
+     
+ }
+ th {
+     font-weight:bold;
+ }
