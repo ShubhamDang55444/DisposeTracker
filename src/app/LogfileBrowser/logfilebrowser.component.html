@@ -23,33 +23,56 @@
     </div>
     <button  id='proceed' type="button" (click)="UploadUserFile()" class="btn btn-primary ">Proceed</button>
 </form> -->
-<div> -->
-  <!-- <div class="col-md-2">Filter by:</div>     
-  <div class="col-md-4">
-    <input type="textbox"  [(ngModel)]='listFilter'  />
-  </div>
-  <div class="row"
-      *ngIf='listFilter'>
-      <div class="col-md-6">
-          <h4>Filtered By:- {{listFilter}}</h4>
-      </div>
-  </div> -->
-      
+
+   <!-- <div class="container">
+    <div class="search-product">
+      <input class="form-control" type="text" name="search" [(ngModel)]="search"  placeholder="Filter" />
+    </div>
+   </div>     
   
-    <div style="text-align:left;width:1200px;overflow-x:scroll;height: 3000px;" class="overflow-visible">
-           
-        <table *ngIf="reportParserData">           
-            <tr>
+    
+  
+  
+    <!-- <div style="text-align:left;width:1200px;height: 3000px;" class="overflow-visible"> -->
+        <!-- <div>   
+        <table *ngIf="reportParserData" class="table table-striped">           
+          <thead> 
+          <tr>
                 <th>Name</th>
                     <th>Count</th>
-                    <th></th>                        
+                                           
             </tr>
-               
-            <tr *ngFor="let data of reportParserData">
+          </thead>
+           <tbody>    
+            <tr *ngFor="let data of reportParserData| filter:search">
                 <td>{{data.m_Name}}</td>
                     <td>{{data.m_Count}}</td>
                     <!-- <td>{{data.m_ListOfCallStacks.m_stackFrames}}</td> -->
                        
-            </tr>
+            <!-- </tr>
+          </tbody>
         </table>
+    </div>  -->
+   
+     <div id="myGrid"> 
+       
+      <ag-grid-angular 
+      
+      style="width: 1500px; height: 800px;"
+      class="ag-theme-fresh"
+        
+       [columnDefs]="columnDefs"
+       [enableSorting]="true"
+       [enableFilter]="true"
+       [animateRows]="true"
+       [pagination]="true"
+       [sortingOrder]="sortingOrder"
+     (gridReady)=   "onGridReady($event)"
+     ></ag-grid-angular>
+  
     </div>
+
+     
+  
+
+   

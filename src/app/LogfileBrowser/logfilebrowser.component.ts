@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {HttpClientModule, HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { IReportParserData } from './reportParserData';
+import {NgForm} from '@angular/forms';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {FormsModule} from '@angular/forms'
 
 @Component ({
     templateUrl:'./logfilebrowser.component.html',
@@ -9,39 +12,59 @@ import { IReportParserData } from './reportParserData';
 })
 export class LogFileBrowserComponent implements OnInit
 {
-    fileName = 'Select Portal Profiler log file to proceed';
-    url:'';
+     private gridApi;
+     private gridColumnApi;  
+     columnDefs;
+      sortingOrder;
     file:File = null;
-    reportParserDatUrl= 'http://localhost:3000/';
+    reportParserDatUrl= 'http://localhost:3000/file';
     reportParserData:string[];
-    filteredReportParserData:string[]=[];
-    _filterData='';
-
-    get filterData():string
-    {
-        return this._filterData;
-    }
-    set filterData(value:string)
-
-    {
-        this._filterData=value;
-       //this.filteredReportParserData= this.filterData ? this.performFilter(this.filterData):this.reportParserData
-    }
+    filteredParserData:string[];
+  
+    search:string  ;
     ngOnInit(): void {
-        this.http.get(this.reportParserDatUrl).subscribe(res=> 
-            {
-                this.reportParserData= res as string[];
-                console.log(this.reportParserData);
-            }),
-            (err: HttpErrorResponse) => {
-              console.log (err.message);
-            }
+        // this.http.get(this.reportParserDatUrl).subscribe(res=> 
+        //     {
+        //         this.reportParserData= res as string[];
+        //         this.filteredParserData= this.reportParserData;
+        //         console.log(this.reportParserData);
+        //     }),
+        //     (err: HttpErrorResponse) => {
+        //       console.log (err.message);
+        //     }
 
         
     }
      constructor(private http:HttpClient){
-        
+        this.columnDefs=[
+          {
+            headerName:"NAMES",
+            field:"m_Name",
+            width:800,
+           
+            
+          },
+          {
+            headerName:"Count",
+            field:"m_Count",
+            width:100
+          },
+        ]
      }
+
+     onGridReady(params)
+     {
+       this.gridApi=params.api;
+       this.gridColumnApi=params.columnApi;
+     let dataValue= [{"m_Name":"DANG","m_Count":"40"}]
+        this.http.get(this.reportParserDatUrl)
+       .subscribe(res=>
+        {
+      //     console.log(res);
+          params.api.setRowData(res);
+         })
+    // params.api.setRowData(dataValue); 
+      }
      
     
     onFileSelected(event)

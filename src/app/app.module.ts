@@ -9,6 +9,10 @@ import { RouterModule } from '@angular/router';
 import { LogFileBrowserComponent } from './LogfileBrowser/logfilebrowser.component';
 //import { LocalLogFileAnalysisComponent } from './LocaLogFileAnalysis/localFileAnalysis.component';
 import {HttpClientModule} from '@angular/common/http'
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {FormsModule} from '@angular/forms';
+import {AgGridModule} from 'ag-grid-angular';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +26,12 @@ import {HttpClientModule} from '@angular/common/http'
   ],
   imports: [
     BrowserModule,
+    Ng2SearchPipeModule,
     HttpClientModule,
+    FormsModule,
+    AgGridModule.withComponents([]),
+    
+  
     RouterModule.forRoot([
      {path:'logfilebrowser', component: LogFileBrowserComponent} ,
     ])
