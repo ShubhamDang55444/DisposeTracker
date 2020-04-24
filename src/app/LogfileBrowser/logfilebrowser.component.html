@@ -1,78 +1,24 @@
-<!-- <div class="input-group">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-    </div>
+  <div class="input-group inline-form-grp">
     <div class="custom-file">
-      <input type="file" class="custom-file-input" id="inputGroupFile01"
-        aria-describedby="inputGroupFileAddon01">
-      <label class="custom-file-label" for="inputGroupFile01">Choose Portal Profiler Log file to proceed</label>
-    </div>
-    <div>
-        <button type="submit" (click)='onProceed()' class="btn btn-primary">Proceed</button>
-    </div>
-    
-  </div>
-  
-   -->
-<!-- <!-- <form class="form-horizontal">
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10"> -->
-            <!-- <input type="text" placeholder="Enter Portal Profiler Log File to proceed" readonly/>            -->
-                <!-- <input type="file" (change)="onFileSelected($event)"  class="file-upload btn btn-secondary "   />
-                    </div>
-    </div>
-    <button  id='proceed' type="button" (click)="UploadUserFile()" class="btn btn-primary ">Proceed</button>
-</form> -->
+        <input type="file" class="custom-file-input" (change)="onFileSelected($event)" >
+        <label class="custom-file-label shadow" >{{fileName}}</label>  
+      </div>
+  <span class="grouped-btn shadow">
+    <button class="btn btn-info set-height" type="submit" (click)="UploadUserFile()" value="Search">Proceed</button>
+  </span>
+  <div id="myGrid" >
+<ag-grid-angular style="width: 1200px; height: 900px;" class="ag-theme-fresh" [columnDefs]="columnDefs" 
+      [enableSorting]="true" [enableFilter]="true" [animateRows]="true" [pagination]="true" [paginationAutoPageSize]="true"
+       [sortingOrder]="sortingOrder"  (gridReady)="onGridReady($event)"></ag-grid-angular> 
+ 
+ 
 
-   <!-- <div class="container">
-    <div class="search-product">
-      <input class="form-control" type="text" name="search" [(ngModel)]="search"  placeholder="Filter" />
-    </div>
-   </div>     
-  
-    
-  
-  
-    <!-- <div style="text-align:left;width:1200px;height: 3000px;" class="overflow-visible"> -->
-        <!-- <div>   
-        <table *ngIf="reportParserData" class="table table-striped">           
-          <thead> 
-          <tr>
-                <th>Name</th>
-                    <th>Count</th>
-                                           
-            </tr>
-          </thead>
-           <tbody>    
-            <tr *ngFor="let data of reportParserData| filter:search">
-                <td>{{data.m_Name}}</td>
-                    <td>{{data.m_Count}}</td>
-                    <!-- <td>{{data.m_ListOfCallStacks.m_stackFrames}}</td> -->
-                       
-            <!-- </tr>
-          </tbody>
-        </table>
-    </div>  -->
-   
-     <div id="myGrid"> 
-       
-      <ag-grid-angular 
-      
-      style="width: 1500px; height: 800px;"
-      class="ag-theme-fresh"
-        
-       [columnDefs]="columnDefs"
-       [enableSorting]="true"
-       [enableFilter]="true"
-       [animateRows]="true"
-       [pagination]="true"
-       [sortingOrder]="sortingOrder"
-     (gridReady)=   "onGridReady($event)"
-     ></ag-grid-angular>
-  
-    </div>
 
-     
-  
 
-   
+
+
+
+
+
+
+
