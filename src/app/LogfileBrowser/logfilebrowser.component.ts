@@ -11,8 +11,13 @@ import { NgForm } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import 'rxjs/add/operator/map';
+
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/Observable/throw';
+import { error } from '@angular/compiler/src/util';
+import { LogFileBrowserService } from './logfilebrowser.service';
+
+
 
 @Component({
   templateUrl: './logfilebrowser.component.html',
@@ -26,30 +31,56 @@ export class LogFileBrowserComponent implements OnInit {
   errorMessage = '';
   loading = true;
   file: File = null;
-
-  fileName: string = 'Enter Portal Profiler Log file To Proceed';
+  fileName:string='Enter Portal Profiler Log File to proceed'
+ 
+  
   reportParserDatUrl = 'http://localhost:3000/file';
   reportParserData: string[];
   filteredParserData: string[];
 
   search: string;
-  ngOnInit(): void {}
-  constructor(private http: HttpClient) {
+  ngOnInit(): void {
+    
+  }
+  constructor(private http: HttpClient,private logfilebrowserService:LogFileBrowserService) {
     this.columnDefs = [
       {
         headerName: 'NAMES',
         field: 'm_Name',
         width: 800,
+        
       },
       {
         headerName: 'Count',
         field: 'm_Count',
         width: 100,
+      
       },
     ];
   }
+ 
+  onFileSelected(event) {
+    // console.log("hi");
+    this.logfilebrowserService.getFileDetails(event);
+    this.fileName = this.logfilebrowserService.fileName
+    if (!this.validateFile(this.fileName)) {
+      alert('Selected file format is not supported \n Please upload Dispose Tracker Log File');
+      return false;}
+    
+  }
+  validateFile(name: String) {
+    let fileIndex = name.substring(name.lastIndexOf('.') + 1);
+    if (fileIndex.toLowerCase() == 'log') {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
   onGridReady(params) {
+   
+
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
 
@@ -59,40 +90,45 @@ export class LogFileBrowserComponent implements OnInit {
     // });
   }
 
-  onFileSelected(event) {
-    // console.log("hi");
-    console.log(event);
-    this.file = event.target.files[0];
-    this.fileName = event.target.files[0].name;
-    console.log('selectedFiles: ' + this.fileName);
-  }
+  
 
   UploadUserFile() {
-    let formdata: FormData = new FormData();
-    formdata.append('file', this.file, this.file.name);
 
-    const url = 'http://localhost:3000/api/file';
-
-    this.http
-      .post(url, formdata)
-
-      .subscribe((res) => {
-        console.log(res);
+  
+    this.logfilebrowserService.getData()
+    .subscribe((res) => {
+        // console.log(res);
         let newData = res;
-        this.gridApi.setRowData(newData),
-          (error) => {
-            //Error callback
-            console.error('error caught in component');
-          };
-      });
+        this.gridApi.setRowData(newData) 
+      
+
+    }
+    );
+
+    
+    // let formdata: FormData = new FormData();
+    // formdata.append('file', this.file, this.file.name);
+
+    // const url = 'http://localhost:3000/api/files';
+
+    // this.http
+    //   .post(url, formdata)
+      // .pipe(tap(data=>console.log('All'+ JSON.stringify(data))),
+      // catchError(this.ErrorHandler)
+      // );
+      // .subscribe((res) => {
+      //   console.log(res);
+      //   let newData = res;
+      //   this.gridApi.setRowData(newData)
+      //   .catch(this.ErrorHandler),
+
+      //   (error)=>{console.log(error);
+      //   }
+         
+      // });
+
+     
   }
 
-  private ErrorHandler(errorResponse: HttpErrorResponse) {
-    if (errorResponse instanceof ErrorEvent) {
-      console.error('Client Side Error', errorResponse.error.message);
-    } else {
-      console.error('Server Side Error', errorResponse);
-    }
-    return throwError('please try again');
-  }
+ 
 }
