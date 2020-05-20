@@ -12,6 +12,9 @@ import {HttpClientModule} from '@angular/common/http'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {FormsModule} from '@angular/forms';
 import {AgGridModule} from 'ag-grid-angular';
+import {TreeTableModule} from 'primeng/treetable';
+import { TreeModule } from 'primeng/primeng';
+
 
 
 @NgModule({
@@ -30,6 +33,8 @@ import {AgGridModule} from 'ag-grid-angular';
     HttpClientModule,
     FormsModule,
     AgGridModule.withComponents([]),
+    TreeTableModule,
+    
     
   
     RouterModule.forRoot([

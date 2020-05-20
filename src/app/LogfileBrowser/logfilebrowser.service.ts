@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable'
 
+import {TreeNode} from 'primeng/primeng';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -20,7 +22,7 @@ export class LogFileBrowserService {
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<any> {
+  getData(): Observable<TreeNode[]> {
     let formdata: FormData = new FormData();
     formdata.append('file', this.file, this.file.name);
 
@@ -34,9 +36,12 @@ export class LogFileBrowserService {
     if (errorResponse.error instanceof ErrorEvent) {
    console.error('Client Side Error', errorResponse.error.message)  
     } else {
-      console.error('Server Side Error' ,errorResponse, errorResponse.status)
+      console.error('Server Side Error' ,errorResponse, errorResponse.status,errorResponse.statusText)
+      window.alert( errorResponse.status+ ' ' + errorResponse.statusText);
     }
    //console.error(errMessage);
+  
+
     return Observable.throw(errorResponse);
   }
 
@@ -50,5 +55,9 @@ export class LogFileBrowserService {
 
     return this.fileName;
   }  
+
+  
+
+ 
   
 }

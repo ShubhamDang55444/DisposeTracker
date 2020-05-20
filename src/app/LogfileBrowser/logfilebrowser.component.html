@@ -7,21 +7,32 @@
     <button class="btn btn-info set-height" type="submit" (click)="UploadUserFile()" value="Search">Proceed</button>
   </span>
 
-<ag-grid-angular style="width: 1200px; height: 900px;" class="ag-theme-alpine" [columnDefs]="columnDefs" 
+<!-- <ag-grid-angular style="width: 1200px; height: 900px;" class="ag-theme-alpine" [columnDefs]="columnDefs" 
       [enableSorting]="true" [enableFilter]="true" [animateRows]="true" [pagination]="true" [paginationPageSize]="80"
-       [sortingOrder]="sortingOrder"      
+       [sortingOrder]="sortingOrder"      [rowSelection]="rowSelection"   (selectionChanged)="onSelectionChanged($event)"
      (gridReady)="onGridReady($event)"> 
+     
       
 
       </ag-grid-angular> 
  
- 
-
-
-
-
-
-
-
+  -->
+ <p-treeTable [value]="files" [columns]="cols" >
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of cols">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <tr>
+            <td *ngFor="let col of cols; let i = index">
+                <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+                {{rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-treeTable>
 
 
