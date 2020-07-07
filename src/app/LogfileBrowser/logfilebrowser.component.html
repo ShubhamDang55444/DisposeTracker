@@ -4,24 +4,17 @@
         <label class="custom-file-label shadow" >{{fileName}}</label>  
       </div>
   <span class="grouped-btn shadow">
-    <button class="btn btn-info set-height" type="submit" (click)="UploadUserFile()" value="Search">Proceed</button>
+    <button class="btn btn-info set-height" type="submit" (click)="SubmitFile()" value="Search">Submit</button> 
+ 
+   
   </span>
-
-<ag-grid-angular style="width: 1200px; height: 900px;" class="ag-theme-alpine" [columnDefs]="columnDefs" 
-      [enableSorting]="true" [enableFilter]="true" [animateRows]="true" [pagination]="true" [paginationPageSize]="80"
-       [sortingOrder]="sortingOrder"      
-     (gridReady)="onGridReady($event)"> 
+  </div>
+  <div class="card" style="width: 18rem;">
+   
+    
       
-
-      </ag-grid-angular> 
+     
+   <br><br>   <a [routerLink] ="['/submitted-user-file']" href="#" class="btn btn-primary stretched-link">{{fileSubmittedMessage}}</a>
+    </div>
  
- 
-
-
-
-
-
-
-
-
-
+   

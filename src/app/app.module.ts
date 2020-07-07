@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {FormsModule} from '@angular/forms';
 import {AgGridModule} from 'ag-grid-angular';
+import { SubmittedUserFileComponent } from './LogfileBrowser/submitted-user-file/submitted-user-file.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {AgGridModule} from 'ag-grid-angular';
     AppComponent,
     HeaderComponent,
     LogFileBrowserComponent,
+    SubmittedUserFileComponent,
     
     //LocalFileAnalysisComponent
     
@@ -34,6 +36,7 @@ import {AgGridModule} from 'ag-grid-angular';
   
     RouterModule.forRoot([
      {path:'logfilebrowser', component: LogFileBrowserComponent} ,
+     {path:'submitted-user-file',component:SubmittedUserFileComponent},
     ])
    
   ],

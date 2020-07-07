@@ -16,96 +16,88 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/Observable/throw';
 import { error } from '@angular/compiler/src/util';
 import { LogFileBrowserService } from './logfilebrowser.service';
-
-
+import { strict } from 'assert';
 
 @Component({
   templateUrl: './logfilebrowser.component.html',
   styleUrls: ['./logfilebrowser.component.css'],
 })
 export class LogFileBrowserComponent implements OnInit {
-  private gridApi;
-  private gridColumnApi;
-  columnDefs;
-  sortingOrder;
+  // private gridApi;
+  // private gridColumnApi;
+  // columnDefs;
+
   errorMessage = '';
   loading = true;
   file: File = null;
-  fileName:string='Enter Portal Profiler Log File to proceed'
- 
-  
-  reportParserDatUrl = 'http://localhost:3000/file';
-  reportParserData: string[];
-  filteredParserData: string[];
+  fileName: string = 'Enter Portal Profiler Log File to proceed';
+  fileSubmittedMessage = '';
 
-  search: string;
-  ngOnInit(): void {
-    
+  // reportParserDatUrl = 'http://localhost:3000/filesssss';
+  // reportParserData: string[];
+  // filteredParserData: string[];
+
+  // search: string;
+  ngOnInit(): void {}
+  constructor(
+    private http: HttpClient,
+    private logfilebrowserService: LogFileBrowserService
+  ) {
+    // this.columnDefs = [
+    //   {
+    //     headerName: 'NAMES',
+    //     field: 'm_Name',
+    //     width: 800,
+    //   },
+    //   {
+    //     headerName: 'Count',
+    //     field: 'm_Count',
+    //     width: 100,
+    //   },
+    // ];
   }
-  constructor(private http: HttpClient,private logfilebrowserService:LogFileBrowserService) {
-    this.columnDefs = [
-      {
-        headerName: 'NAMES',
-        field: 'm_Name',
-        width: 800,
-        
-      },
-      {
-        headerName: 'Count',
-        field: 'm_Count',
-        width: 100,
-      
-      },
-    ];
-  }
- 
+
   onFileSelected(event) {
     // console.log("hi");
     this.logfilebrowserService.getFileDetails(event);
-    this.fileName = this.logfilebrowserService.fileName
+    this.fileName = this.logfilebrowserService.fileName;
     if (!this.validateFile(this.fileName)) {
-      alert('Selected file format is not supported \n Please upload Dispose Tracker Log File');
-      return false;}
-    
+      alert(
+        'Selected file format is not supported \n Please upload Dispose Tracker Log File'
+      );
+      return false;
+    }
   }
   validateFile(name: String) {
     let fileIndex = name.substring(name.lastIndexOf('.') + 1);
     if (fileIndex.toLowerCase() == 'log') {
-        return true;
+      return true;
+    } else {
+      return false;
     }
-    else {
-        return false;
+  }
+  //#region Grid Initilaization
+  // onGridReady(params) {
+  //   this.gridApi = params.api;
+  //   this.gridColumnApi = params.columnApi;
+    //#endregion
+  
+  SubmitFile() {
+    let fileSubmit = this.logfilebrowserService.getData();
+    if (fileSubmit != null) {
+      this.fileSubmittedMessage =
+        'Your File has been submitted.Please Click here for Result';
+      
     }
-}
-
-  onGridReady(params) {
-   
-
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-
-    // this.http.get(this.reportParserDatUrl).subscribe((res) => {
-    //   //     console.log(res);
-    //   params.api.setRowData(res);
-    // });
   }
 
-  
+  // UploadUserFile() {
+  //   this.logfilebrowserService.getData().subscribe((res) => {
+  //     // console.log(res);
+  //     let newData = res;
+  //     this.gridApi.setRowData(newData);
+  //   });
 
-  UploadUserFile() {
-
-  
-    this.logfilebrowserService.getData()
-    .subscribe((res) => {
-        // console.log(res);
-        let newData = res;
-        this.gridApi.setRowData(newData) 
-      
-
-    }
-    );
-
-    
     // let formdata: FormData = new FormData();
     // formdata.append('file', this.file, this.file.name);
 
@@ -113,22 +105,17 @@ export class LogFileBrowserComponent implements OnInit {
 
     // this.http
     //   .post(url, formdata)
-      // .pipe(tap(data=>console.log('All'+ JSON.stringify(data))),
-      // catchError(this.ErrorHandler)
-      // );
-      // .subscribe((res) => {
-      //   console.log(res);
-      //   let newData = res;
-      //   this.gridApi.setRowData(newData)
-      //   .catch(this.ErrorHandler),
+    // .pipe(tap(data=>console.log('All'+ JSON.stringify(data))),
+    // catchError(this.ErrorHandler)
+    // );
+    // .subscribe((res) => {
+    //   console.log(res);
+    //   let newData = res;
+    //   this.gridApi.setRowData(newData)
+    //   .catch(this.ErrorHandler),
 
-      //   (error)=>{console.log(error);
-      //   }
-         
-      // });
+    //   (error)=>{console.log(error);
+    //   }
 
-     
+    // });
   }
-
- 
-}
