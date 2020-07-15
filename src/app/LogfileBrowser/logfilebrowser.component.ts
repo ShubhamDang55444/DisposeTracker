@@ -37,24 +37,13 @@ export class LogFileBrowserComponent implements OnInit {
   // reportParserData: string[];
   // filteredParserData: string[];
 
-  // search: string;
+ 
   ngOnInit(): void {}
   constructor(
     private http: HttpClient,
     private logfilebrowserService: LogFileBrowserService
   ) {
-    // this.columnDefs = [
-    //   {
-    //     headerName: 'NAMES',
-    //     field: 'm_Name',
-    //     width: 800,
-    //   },
-    //   {
-    //     headerName: 'Count',
-    //     field: 'm_Count',
-    //     width: 100,
-    //   },
-    // ];
+  
   }
 
   onFileSelected(event) {
@@ -76,7 +65,7 @@ export class LogFileBrowserComponent implements OnInit {
       return false;
     }
   }
-  //#region Grid Initilaization
+  
   // onGridReady(params) {
   //   this.gridApi = params.api;
   //   this.gridColumnApi = params.columnApi;
@@ -86,9 +75,9 @@ export class LogFileBrowserComponent implements OnInit {
     let fileSubmit = this.logfilebrowserService.getData();
     if (fileSubmit != null) {
       this.fileSubmittedMessage =
-        'Your File has been submitted.Please Click here for Result';
-      
-    }
+      `Your File has been submitted
+       Click here for Result`                      
+          }
   }
 
   // UploadUserFile() {

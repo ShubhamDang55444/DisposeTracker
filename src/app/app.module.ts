@@ -13,6 +13,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {FormsModule} from '@angular/forms';
 import {AgGridModule} from 'ag-grid-angular';
 import { SubmittedUserFileComponent } from './LogfileBrowser/submitted-user-file/submitted-user-file.component';
+import { AboutDisposeTrackerComponent } from './header/main-page/about-dispose-tracker/about-dispose-tracker.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { SubmittedUserFileComponent } from './LogfileBrowser/submitted-user-file
     HeaderComponent,
     LogFileBrowserComponent,
     SubmittedUserFileComponent,
+    AboutDisposeTrackerComponent,
     
     //LocalFileAnalysisComponent
     
@@ -37,6 +39,7 @@ import { SubmittedUserFileComponent } from './LogfileBrowser/submitted-user-file
     RouterModule.forRoot([
      {path:'logfilebrowser', component: LogFileBrowserComponent} ,
      {path:'submitted-user-file',component:SubmittedUserFileComponent},
+     {path: 'home',component:AboutDisposeTrackerComponent},
     ])
    
   ],
