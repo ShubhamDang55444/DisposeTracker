@@ -39,3 +39,13 @@
  th {
      font-weight:bold;
  }
+
+ #submitted
+ {
+    white-space: nowrap;
+    text-align: center;
+    color: red;
+    
+   
+    
+ }

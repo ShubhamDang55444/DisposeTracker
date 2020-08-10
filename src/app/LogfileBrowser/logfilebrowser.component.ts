@@ -31,7 +31,7 @@ export class LogFileBrowserComponent implements OnInit {
   loading = true;
   file: File = null;
   fileName: string = 'Enter Portal Profiler Log File to proceed';
-  fileSubmittedMessage = '';
+  fileSubmittedMessage:string= "";
 
   // reportParserDatUrl = 'http://localhost:3000/filesssss';
   // reportParserData: string[];
@@ -74,9 +74,9 @@ export class LogFileBrowserComponent implements OnInit {
   SubmitFile() {
     let fileSubmit = this.logfilebrowserService.getData();
     if (fileSubmit != null) {
-      this.fileSubmittedMessage =
-      `Your File has been submitted
-       Click here for Result`                      
+      this.fileSubmittedMessage +=  " -Your File has been submitted.  Click here for Result"; 
+                 
+                   
           }
   }
 
